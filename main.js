@@ -1,18 +1,62 @@
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
+var lineWidth = 5;
 
 autoSetCanvasSize(canvas);
 
 listenToUser(canvas);
 
 var eraserEnabled = false;
-eraser.onclick = function() {
-    eraserEnabled = true;
-    actions.className = "actions change";
-}
-brush.onclick = function() {
+pen.onclick = function() {
     eraserEnabled = false;
-    actions.className = "actions";
+    pen.classList.add('active');
+    eraser.classList.remove('active');
+}
+eraser.onclick = function() {
+        eraserEnabled = true;
+        eraser.classList.add('active');
+        pen.classList.remove('active');
+    }
+    //清空
+clear.onclick = function() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    //下载
+download.onclick = function() {
+    var url = canvas.toDataURL('img/png');
+    var a = document.createElement('a');
+    document.body.appendChild(a);
+    a.href = url;
+    a.download = 'myCanvas';
+    a.target = '_blank';
+    a.click();
+}
+
+
+red.onclick = function() {
+    ctx.strokeStyle = 'red';
+    red.classList.add('active');
+    green.classList.remove('active');
+    blue.classList.remove('active');
+}
+green.onclick = function() {
+    ctx.strokeStyle = 'green';
+    green.classList.add('active');
+    red.classList.remove('active');
+    blue.classList.remove('active');
+}
+blue.onclick = function() {
+        ctx.strokeStyle = 'blue';
+        blue.classList.add('active');
+        green.classList.remove('active');
+        red.classList.remove('active');
+    }
+    //画笔粗细
+thin.onclick = function() {
+    lineWidth = 5;
+}
+thick.onclick = function() {
+    lineWidth = 10;
 }
 
 
@@ -81,7 +125,6 @@ function listenToUser(canvas) {
                 return;
             }
             if (eraserEnabled) {
-
                 ctx.clearRect(x - 15, y - 15, 30, 30);
             } else {
                 var newPoint = { x: x, y: y };
@@ -98,9 +141,9 @@ function listenToUser(canvas) {
 /*****/
 function drawLine(x1, y1, x2, y2) {
     ctx.beginPath();
-    ctx.strokeStyle = 'black'; // 线的颜色
+    //ctx.strokeStyle = 'black'; // 线的颜色
     ctx.moveTo(x1, y1); // 起点
-    ctx.lineWidth = 5; // 线的宽度
+    ctx.lineWidth = lineWidth; // 线的宽度
     ctx.lineTo(x2, y2); //终点
     ctx.stroke();
     ctx.closePath();

@@ -7,16 +7,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>canvasDemo</title>
     <link rel="stylesheet" href="./style.css">
-
+    <!-- 字体图标 -->
+    <script src="//at.alicdn.com/t/font_1288144_t06clf60n6e.js"></script>
 </head>
 
 <body>
     <canvas id="canvas" width="300px" height="300px"></canvas>
     <div id="actions" class="actions">
-        <button id="eraser">橡皮擦</button>
-        <button id="brush">画笔</button>
+        <svg id='pen' class="icon active">
+            <use xlink:href="#icon-ApplePencil"></use>
+        </svg>
+        <svg id='eraser' class="icon">
+            <use xlink:href="#icon-icon_eraser"></use>
+        </svg>
+        <svg id='clear' class="icon">
+            <use xlink:href="#icon-clear-icon"></use>
+        </svg>
+        <svg id='download' class="icon">
+            <use xlink:href="#icon-download"></use>
+        </svg>
     </div>
-
+    <ol id='colors' class='colors'>
+        <li id='red' class='red'></li>
+        <li id='green' class='green'></li>
+        <li id='blue' class='blue'></li>
+    </ol>
+    <ol class="sizes">
+        <li id='thin' class='thin'></li>
+        <li id='thick' class='thick'></li>
+    </ol>
 </body>
 <script src="./main.js"></script>
 
